@@ -218,3 +218,56 @@ func main() {
 // C 3 5 8
 // A 1 3 4
 ```
+
+# `interface`
+## 基本
+- 一种**抽象**类型
+
+``` go
+package main
+
+import "fmt"
+
+type Sayer interface {
+	say()
+}
+
+type Cat struct {
+	Sayer
+}
+
+type Dog struct {
+	Sayer
+}
+
+func (cat *Cat) say() {
+	fmt.Println("miao miao miao~")
+}
+
+func (dog *Dog) say() {
+	fmt.Println("wang wang wang~")
+}
+
+func main() {
+	var dog Dog
+	dog.say()
+	var cat Cat
+	cat.say()
+}
+```
+## 空接口的应用
+- 空接口作为函数的参数
+- 空接口作为`map`的值
+- 类型断言
+``` go
+func main() {
+	var x interface{}
+	x = "hello world"
+	v, ok := x.(string)
+	if ok {
+		fmt.Println(v)
+	} else {
+		fmt.Println("类型断言失败")
+	}
+}
+```
